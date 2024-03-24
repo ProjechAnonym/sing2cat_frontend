@@ -9,7 +9,7 @@ import {
   Span,
 } from "./style";
 import { lightColor, darkColor } from "./colors";
-import { GetHrefEle } from "./utils";
+import { GetHrefEle, Scroll2Ele } from "./utils";
 export interface Fixed {
   vertival: "top" | "bottom";
   Vdis: string;
@@ -42,15 +42,14 @@ export const Anchor: FC<AnchorProps> = ({
   fontSize = "1rem",
   width = "3rem",
 }) => {
-  const [select, setSelect] = useState(`${data[0].label}-0`);
+  const [select, setSelect] = useState(`${data[0].title}-0`);
   const [visible, setVisible] = useState(false);
   const [exit, setExit] = useState(false);
   const handleScroll = useCallback(() => {
     const eleHeight = GetHrefEle(data);
     eleHeight.forEach(
       (ele) =>
-        (ele as { key: string; size: number[] }).size[0] < 10 &&
-        (ele as { key: string; size: number[] }).size[1] > 0 &&
+        ele.size[0] < 0.3 * window.innerHeight &&
         setSelect((ele as { key: string; size: number[] }).key)
     );
   }, [data]);
@@ -115,7 +114,11 @@ export const Anchor: FC<AnchorProps> = ({
               href={part.onClick}
               key={`${part.title}-${i}`}
               $selected={select === `${part.title}-${i}`}
-              onClick={() => setSelect(`${part.title}-${i}`)}
+              onClick={(e) => {
+                e.preventDefault();
+                Scroll2Ele(part.onClick as string);
+                setSelect(`${part.title}-${i}`);
+              }}
             >
               <Span>{part.label}</Span>
             </Href>

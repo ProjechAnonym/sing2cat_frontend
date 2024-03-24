@@ -108,7 +108,9 @@ export const Href = styled.a<{
   &:hover {
     cursor: pointer;
     transform: scale(1);
-    outline: 1px dashed ${(props) => props.$selectFontColor};
+    color: ${(props) => props.$selectFontColor};
+    outline: 1px solid ${(props) => props.$selectFontColor};
+    box-shadow: 2px 2px 3px 1px ${(props) => props.$selectFontColor};
   }
 `;
 export const Container = styled.div<{ $fixed: Fixed | undefined }>`

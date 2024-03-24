@@ -79,7 +79,7 @@ function App() {
             style={{
               display: "flex",
               flexDirection: "column",
-              height: "15rem",
+              height: "20rem",
             }}
           >
             <ButtonComponent onClick={() => setVisible(true)}>

@@ -113,7 +113,7 @@ export const DropList: FC<DropListProp> = ({
         ></Input>
       )}
       <CollapseIcon
-        className="iconfont icon-collapse"
+        className="bi bi-caret-up-fill"
         $visible={visible}
         $color={dark ? darkColor : lightColor}
         ref={LabelIcon}
