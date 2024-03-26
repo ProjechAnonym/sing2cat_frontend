@@ -6,7 +6,7 @@ import {
   CSSProperties,
   FC,
 } from "react";
-import { ButtonComponent } from "../../button/button";
+import { ButtonComponent } from "../../button";
 import { lightModal, darkModal } from "../modalColor";
 import { PopModalDiv, ContainerDiv } from "./style";
 import { ModalHead } from "../headStyle";

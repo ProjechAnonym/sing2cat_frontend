@@ -1,4 +1,4 @@
-import { data } from "./anchor";
+import { data } from ".";
 import { cloneDeep } from "lodash";
 export function GetHrefEle(
   datas: Array<data>

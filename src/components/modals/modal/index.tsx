@@ -12,7 +12,7 @@ import { ModalDiv, Mask } from "./style";
 import { ModalHead, ModalHeadIcon } from "../headStyle";
 import { ModalFoot } from "../footStyle";
 import { lightModal, darkModal } from "../modalColor";
-import { ButtonComponent } from "../../button/button";
+import { ButtonComponent } from "../../button";
 interface ModalProps {
   maskClose?: boolean;
   width?: string;

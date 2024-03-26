@@ -17,7 +17,7 @@ import {
 } from "./style";
 import { lightColor, darkColor } from "./colors";
 import { getSearchResult } from "./utils";
-import { Input } from "../input/input";
+import { Input } from "../input";
 interface DropListProp {
   data: Array<any> | undefined;
   style?: CSSProperties;

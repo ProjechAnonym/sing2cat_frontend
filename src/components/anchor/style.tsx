@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { Fixed } from "./anchor";
+import { Fixed } from ".";
 import { ExitAnimation, EntryAnimation } from "./animation";
 function setPosition(position: string) {
   switch (position) {
