@@ -1,7 +1,6 @@
 import styled from "styled-components";
 export const InputContainer = styled.input<{ $width: string; $colors: any }>`
-  font-family: FangSong;
-  font-weight: 1000;
+  font-family: Dingding;
   border: none;
   --accent-color: #63a0cf;
   border-radius: 5px 5px 0px 0px;

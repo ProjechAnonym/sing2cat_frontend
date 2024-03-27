@@ -84,9 +84,7 @@ export const PopOver: FC<PopOverProps> = ({
               <span style={{ whiteSpace: "normal" }}>{title}</span>
             </ModalHead>
           )}
-          <div style={{ fontFamily: "FangSong", fontWeight: "normal" }}>
-            {description}
-          </div>
+          <div style={{ fontFamily: "Dingding" }}>{description}</div>
         </PopModalDiv>
       ) : null}
     </ContainerDiv>

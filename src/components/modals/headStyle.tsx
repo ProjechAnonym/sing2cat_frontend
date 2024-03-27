@@ -3,9 +3,8 @@ export const ModalHead = styled.header`
   width: 100%;
   display: flex;
   flex-direction: row;
-  font-family: FangSong;
+  font-family: Dingding;
   font-size: 1.2rem;
-  font-weight: 1000;
   position: relative;
   user-select: none;
   margin-bottom: 10px;

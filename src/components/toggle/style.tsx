@@ -1,6 +1,7 @@
 import styled from "styled-components";
 export const Container = styled.div`
   position: relative;
+  height: 1.2rem;
 `;
 export const Label = styled.label<{ $backgroundColor: string }>`
   background-color: ${(props) => props.$backgroundColor};
@@ -17,7 +18,7 @@ export const Label = styled.label<{ $backgroundColor: string }>`
     width: 1.1rem;
     border-radius: 5px;
     left: 2px;
-    bottom: 0.1rem;
+    bottom: 0;
     transform: rotate(270deg);
     background-color: rgb(255, 255, 255);
     transition: 0.4s;

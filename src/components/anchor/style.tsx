@@ -90,8 +90,7 @@ export const Href = styled.a<{
   margin: 2px;
   padding: 3px 2px 0 2px;
   text-align: center;
-  font-family: FangSong;
-  font-weight: 1000;
+  font-family: Dingding;
   ${(props) =>
     props.$selected
       ? css`

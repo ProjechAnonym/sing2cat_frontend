@@ -23,8 +23,7 @@ export const Button = styled.button<{
         0.2s ease-in-out;
     `}
   width:fit-content;
-  font-weight: 1000;
-  font-family: FangSong;
+  font-family: Dingding;
   border-radius: 5px;
   position: relative;
   padding: 2.5px 10px;

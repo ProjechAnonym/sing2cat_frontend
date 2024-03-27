@@ -91,17 +91,14 @@ export const PopModal: FC<PopModalProps> = ({
               <span
                 style={{
                   width: "90%",
-                  fontWeight: "1000",
-                  fontFamily: "FangSong",
+                  fontFamily: "Dingding",
                 }}
               >
                 {title}
               </span>
             </ModalHead>
           )}
-          <div style={{ fontFamily: "FangSong", fontWeight: "normal" }}>
-            {description}
-          </div>
+          <div style={{ fontFamily: "Dingding" }}>{description}</div>
           <ModalFoot>
             {foot ? (
               foot

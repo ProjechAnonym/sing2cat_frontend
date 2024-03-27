@@ -28,7 +28,7 @@ export const ListContainer = styled.div<{ $visible: boolean; $exit: boolean }>`
   position: absolute;
   top: calc(100% + 3px);
   overflow-y: auto;
-  height: 6rem;
+  max-height: 6rem;
   display: ${(props) => (props.$visible ? "block" : "none")};
   ${(props) =>
     props.$exit
@@ -52,8 +52,7 @@ export const GroupCard = styled.div<{
 }>`
   letter-spacing: 0.2rem;
   color: ${(props) => props.$colors.fontColor};
-  font-family: FangSong;
-  font-weight: 1000;
+  font-family: Dingding;
   font-size: ${(props) => props.$fontSize};
   height: ${(props) => props.$height};
   user-select: none;
@@ -72,8 +71,7 @@ export const ItemCard = styled.label<{
   letter-spacing: 0.2rem;
   display: inline-block;
   background-color: ${(props) => props.$colors.ItemCard};
-  font-family: FangSong;
-  font-weight: 1000;
+  font-family: Dingding;
   font-size: ${(props) => props.$fontSize};
   height: ${(props) => props.$height};
   color: ${(props) => props.$colors.fontColor};
@@ -101,9 +99,8 @@ export const LabelZone = styled.div<{
   $height: string;
   $fontSize: string;
 }>`
-  font-family: FangSong;
+  font-family: Dingding;
   font-size: ${(props) => props.$fontSize};
-  font-weight: 1000;
   border: none;
   --accent-color: #63a0cf;
   border-radius: 5px 5px 0px 0px;

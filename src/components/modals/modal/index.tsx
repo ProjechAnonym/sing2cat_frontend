@@ -86,8 +86,7 @@ export const Modal: FC<ModalProps> = ({
         )}
         <div
           style={{
-            fontWeight: "normal",
-            fontFamily: "FangSong",
+            fontFamily: "Dingding",
             width: "100%",
           }}
         >
