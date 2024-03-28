@@ -15,7 +15,7 @@ export const Tooltip: FC<TooltipProps> = ({
   descripton,
   shadowColor,
   style,
-  width = "5rem",
+  width = "fit-content",
 }) => {
   const [visible, setVisible] = useState(false);
   const [exit, setExit] = useState(false);

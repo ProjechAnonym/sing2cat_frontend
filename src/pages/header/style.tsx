@@ -1,4 +1,23 @@
 import styled from "styled-components";
+import { DropList } from "../../components/dropList";
+export const StyledDropList = styled(DropList)`
+  @media screen and (min-width: 360px) and (max-width: 489px) {
+    margin: auto 0.4rem;
+  }
+  @media screen and (max-width: 490px) {
+    margin: auto 0.5rem;
+  }
+`;
+export const Icon = styled.i`
+  @media screen and (min-width: 360px) and (max-width: 489px) {
+    margin: 0 2px;
+    font-size: 1rem;
+  }
+  @media screen and (min-width: 490px) {
+    margin: 0 2px;
+    font-size: 1.5rem;
+  }
+`;
 export const Container = styled.header`
   display: flex;
   width: 100%;
@@ -12,12 +31,20 @@ export const Img = styled.img`
   size: 1.5rem, 1.5rem;
   font-family: Dingding;
   font-size: 1.5rem;
+  margin: 0 3px;
 `;
 export const Span = styled.span`
-  font-size: 1.2rem;
+  @media screen and (min-width: 360px) and (max-width: 489px) {
+    font-size: 1rem;
+    margin: auto 3px;
+  }
+  @media screen and (min-width: 490px) {
+    font-size: 1.5rem;
+    margin: auto 0.5rem;
+  }
+
   font-family: Dingding;
-  margin: 0 0.5rem;
-  padding: 0 3px;
+
   color: ${(props) => props.theme.colors.fontColor};
   transition: 0.2s;
   &:hover {

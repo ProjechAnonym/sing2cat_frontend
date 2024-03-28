@@ -5,6 +5,7 @@ import { FecthConfig } from "./utlis/fetchConfig";
 import { lightTheme, darkTheme } from "./theme";
 import { ThemeProvider } from "styled-components";
 import { Container } from "./pages/container";
+import Footer from "./pages/footer";
 import Header from "./pages/header";
 import "./assets/fonts/fonts.css";
 function App() {
@@ -21,7 +22,13 @@ function App() {
     <div className="App">
       <ThemeProvider theme={dark ? darkTheme : lightTheme}>
         <Container>
-          <Header></Header>
+          <Header
+            data={[
+              { label: "a", value: [{ label: "b", value: { key: "c" } }] },
+            ]}
+          ></Header>
+          <div style={{ height: "10rem" }}></div>
+          <Footer></Footer>
         </Container>
       </ThemeProvider>
     </div>

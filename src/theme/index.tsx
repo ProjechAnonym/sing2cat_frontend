@@ -14,7 +14,7 @@ const lightTheme: DefaultTheme = {
   },
   colors: {
     backgroundColor: "#e2fffb",
-    container: "#f5fffe",
+    container: "#d8eafd",
     card: "#EFFFFD",
     fontColor: "#323232",
   },
@@ -35,7 +35,7 @@ const darkTheme: DefaultTheme = {
   colors: {
     backgroundColor: "#313131",
     container: "#525252",
-    card: "#525252",
+    card: "#d6d6d6",
     fontColor: "#f0f8ff",
   },
 };
