@@ -18,6 +18,33 @@ export const styleSlice = createSlice({
   },
 });
 
+export const identitySlice = createSlice({
+  name: "identity",
+  initialState: {
+    token: "",
+    error: "",
+    loading: false,
+    status: false,
+    init: false,
+  },
+  reducers: {
+    setJWT: (state, action) => {
+      state.token = action.payload;
+    },
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
+    setLoading: (state, action) => {
+      state.error = action.payload;
+    },
+    setStatus: (state, action) => {
+      state.status = action.payload;
+    },
+    setInit: (state, action) => {
+      state.init = action.payload;
+    },
+  },
+});
 export const configSlice = createSlice({
   name: "config",
   initialState: { config: {} as any },
@@ -36,6 +63,12 @@ export const configSlice = createSlice({
   },
 });
 export const { setDark, setSider } = styleSlice.actions;
+export const { setInit } = identitySlice.actions;
 export const selectConfig = (state: RootState) => state.config.config;
+export const selectToken = (state: RootState) => state.identity.token;
+export const selectError = (state: RootState) => state.identity.error;
+export const selectLoad = (state: RootState) => state.identity.loading;
+export const selectInit = (state: RootState) => state.identity.init;
+export const selectStatus = (state: RootState) => state.identity.status;
 export const selectDark = (state: RootState) => state.style.dark;
 export const selectSider = (state: RootState) => state.style.sider;

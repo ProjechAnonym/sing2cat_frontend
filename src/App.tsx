@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { FecthConfig } from "./utlis/fetchConfig";
 import { lightTheme, darkTheme } from "./theme";
+import { routes } from "./pages/routes";
 import { ThemeProvider } from "styled-components";
-import { Container } from "./pages/container";
+import { Container, RouteContainer } from "./pages/container";
 import Footer from "./pages/footer";
 import Header from "./pages/header";
 import "./assets/fonts/fonts.css";
 function App() {
   const dispatch = useAppDispatch();
-
+  const [head, setHead] = useState(0);
+  const [foot, setFoot] = useState(0);
   const config = useAppSelector((state) => state.config.config);
   const dark = useAppSelector((state) => state.style.dark);
   useEffect(() => {
@@ -23,12 +25,25 @@ function App() {
       <ThemeProvider theme={dark ? darkTheme : lightTheme}>
         <Container>
           <Header
+            onHeight={(e) => setHead(e)}
             data={[
               { label: "a", value: [{ label: "b", value: { key: "c" } }] },
             ]}
-          ></Header>
-          <div style={{ height: "10rem" }}></div>
-          <Footer></Footer>
+          />
+          <RouteContainer $foot={foot} $head={head}>
+            <BrowserRouter>
+              <Routes>
+                {routes.map((route, i) => (
+                  <Route
+                    path={route.path}
+                    key={`${route.name}-${i}`}
+                    element={route.component}
+                  />
+                ))}
+              </Routes>
+            </BrowserRouter>
+          </RouteContainer>
+          <Footer onHeight={(e) => setFoot(e)} />
         </Container>
       </ThemeProvider>
     </div>

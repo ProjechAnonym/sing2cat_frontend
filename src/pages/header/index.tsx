@@ -1,15 +1,23 @@
 import { useAppSelector, useAppDispatch } from "../../hooks";
+import { useRef, useEffect } from "react";
 import Media from "react-media";
 import { setDark } from "../../slice";
 import { Toggle } from "../../components/toggle";
 import { Container, Img, Span, StyledDropList, Icon } from "./style";
 
-export default function Header(props: { data: Array<any> }) {
+export default function Header(props: {
+  data: Array<any>;
+  onHeight: (data: number) => void;
+}) {
+  const container = useRef<HTMLDivElement>(null);
   const dark = useAppSelector((state) => state.style.dark);
   const dispatch = useAppDispatch();
-  const { data } = props;
+  const { data, onHeight } = props;
+  useEffect(() => {
+    onHeight(container.current!.offsetHeight);
+  }, [container.current?.offsetHeight]);
   return (
-    <Container>
+    <Container ref={container}>
       <Img src={require("../../assets/pic/Myfavicon2.ico")} alt="图标" />
       <span
         style={{

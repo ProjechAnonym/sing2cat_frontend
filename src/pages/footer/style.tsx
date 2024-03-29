@@ -8,7 +8,7 @@ export const LinkContainer = styled.div`
   justify-content: center;
   align-content: center;
   width: 100%;
-  height: 2.5rem;
+  height: auto;
 `;
 export const MsgContainer = styled.div`
   width: 100%;
@@ -17,7 +17,7 @@ export const MsgContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  padding: 5px 0;
+  padding: 3px 0;
 `;
 export const Msg = styled.p`
   width: fit-content;
@@ -28,7 +28,7 @@ export const Msg = styled.p`
   color: #b0b0b0ff;
 `;
 export const Icon = styled.i`
-  font-size: 1.8rem;
+  font-size: 1.2rem;
 `;
 export const Href = styled.a<{
   $defaultFontColor: string;
@@ -40,8 +40,8 @@ export const Href = styled.a<{
   display: flex;
   border-radius: 10px;
   padding: 3px;
-  width: 2rem;
-  height: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
   transition: 0.2s;
   justify-content: center;
   align-items: center;
@@ -52,5 +52,6 @@ export const Href = styled.a<{
     box-shadow: 0 0 5px 2px ${(props) => props.$hoverFontColor};
     background-color: ${(props) => props.$hoverBackgroundColor};
     cursor: pointer;
+    transform: scale(1.1);
   }
 `;

@@ -27,6 +27,10 @@ export const Spin = styled.div`
     animation: ${spinAfter} 2s infinite;
   }
 `;
+export const Container = styled.div`
+  position: relative;
+  display: block;
+`;
 export const LoadMask = styled.div<{ zindex: number }>`
   background-color: #ffffff78;
   position: absolute;
@@ -39,4 +43,5 @@ export const LoadMask = styled.div<{ zindex: number }>`
   transition: 0.5s;
   z-index: ${(props) => props.zindex};
   backdrop-filter: blur(5px);
+  border-radius: 5px;
 `;

@@ -1,21 +1,26 @@
-import { ReactNode, FC } from "react";
+import { ReactNode, FC, CSSProperties } from "react";
 
-import { Spin, LoadMask } from "./style";
+import { Spin, LoadMask, Container } from "./style";
 interface LoadProps {
-  dark?: boolean;
   open: boolean;
   zIndex?: number;
   children?: ReactNode;
+  style?: CSSProperties;
 }
-export const Load: FC<LoadProps> = ({ open, zIndex = 1000, children }) => {
+export const Load: FC<LoadProps> = ({
+  open,
+  zIndex = 1000,
+  children,
+  style,
+}) => {
   return (
-    <div style={{ position: "relative", display: "inline-block" }}>
+    <Container style={style}>
       {open && (
         <LoadMask zindex={zIndex}>
           <Spin />
         </LoadMask>
       )}
       {children}
-    </div>
+    </Container>
   );
 };

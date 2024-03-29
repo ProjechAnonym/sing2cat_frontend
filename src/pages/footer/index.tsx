@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { useTheme } from "styled-components";
 import {
   Container,
@@ -8,16 +9,21 @@ import {
   Msg,
 } from "./style";
 import { Tooltip } from "../../components/toolTip";
-export default function Footer() {
+export default function Footer(props: { onHeight: (data: number) => void }) {
+  const container = useRef<HTMLDivElement>(null);
   const theme = useTheme();
+  const { onHeight } = props;
+  useEffect(() => {
+    onHeight(container.current!.offsetHeight);
+  }, [container.current?.offsetHeight]);
   return (
-    <Container>
+    <Container ref={container}>
       <LinkContainer>
         <Tooltip descripton="telegram" style={{ margin: "0 5px" }}>
           <Href
             target="_Blank"
             href="https://t.me/+5yh2rgXjWBlmMDk1"
-            $hoverBackgroundColor={theme.colors.card}
+            $hoverBackgroundColor="#eaeaea"
             $hoverFontColor="#46b2ff"
             $defaultFontColor={theme.colors.fontColor}
             $defaultBackgroundColor={theme.colors.container}
@@ -29,7 +35,7 @@ export default function Footer() {
           <Href
             target="_Blank"
             href="https://github.com/ProjechAnonym"
-            $hoverBackgroundColor={theme.colors.card}
+            $hoverBackgroundColor="#eaeaea"
             $hoverFontColor="#000000"
             $defaultFontColor={theme.colors.fontColor}
             $defaultBackgroundColor={theme.colors.container}
@@ -40,7 +46,7 @@ export default function Footer() {
         <Tooltip descripton="youtube" style={{ margin: "0 5px" }}>
           <Href
             href="https://www.youtube.com/channel/UCXiiRClqjDLrqzMbq2Kqb4A"
-            $hoverBackgroundColor={theme.colors.card}
+            $hoverBackgroundColor="#eaeaea"
             $hoverFontColor="#ff003c"
             $defaultFontColor={theme.colors.fontColor}
             $defaultBackgroundColor={theme.colors.container}
@@ -52,7 +58,7 @@ export default function Footer() {
           <Href
             target="_Blank"
             href="https://space.bilibili.com/8337954"
-            $hoverBackgroundColor={theme.colors.card}
+            $hoverBackgroundColor="#eaeaea"
             $hoverFontColor="#f796d3"
             $defaultFontColor={theme.colors.fontColor}
             $defaultBackgroundColor={theme.colors.container}
@@ -64,7 +70,7 @@ export default function Footer() {
           <Href
             target="_Blank"
             href="https://blog.sifulin.top"
-            $hoverBackgroundColor={theme.colors.card}
+            $hoverBackgroundColor="#eaeaea"
             $hoverFontColor="#3c836c"
             $defaultFontColor={theme.colors.fontColor}
             $defaultBackgroundColor={theme.colors.container}
