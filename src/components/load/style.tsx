@@ -31,9 +31,13 @@ export const Container = styled.div`
   position: relative;
   display: block;
 `;
-export const LoadMask = styled.div<{ zindex: number }>`
-  background-color: #ffffff78;
-  position: absolute;
+export const LoadMask = styled.div<{
+  $zindex: number;
+  $window: boolean;
+  $backgroundColor: string;
+}>`
+  background-color: ${(props) => props.$backgroundColor};
+  position: ${(props) => (props.$window ? "fixed" : "absolute")};
   width: 100%;
   height: 100%;
   top: 50%;
@@ -41,7 +45,7 @@ export const LoadMask = styled.div<{ zindex: number }>`
   margin: 0 auto;
   transform: translate(-50%, -50%);
   transition: 0.5s;
-  z-index: ${(props) => props.zindex};
+  z-index: ${(props) => props.$zindex};
   backdrop-filter: blur(5px);
   border-radius: 5px;
 `;

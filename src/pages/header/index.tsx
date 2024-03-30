@@ -1,7 +1,8 @@
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import { useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Media from "react-media";
-import { setDark } from "../../slice";
+import { setDark, setStatus } from "../../slice";
 import { Toggle } from "../../components/toggle";
 import { Container, Img, Span, StyledDropList, Icon } from "./style";
 
@@ -9,6 +10,7 @@ export default function Header(props: {
   data: Array<any>;
   onHeight: (data: number) => void;
 }) {
+  const nav = useNavigate();
   const container = useRef<HTMLDivElement>(null);
   const dark = useAppSelector((state) => state.style.dark);
   const dispatch = useAppDispatch();
@@ -109,7 +111,12 @@ export default function Header(props: {
                 height: "100%",
               }}
             >
-              <Span>
+              <Span
+                onClick={() => {
+                  nav("/");
+                  dispatch(setStatus(false));
+                }}
+              >
                 <Icon className="iconfont icon-exit_fill" />
                 退出
               </Span>
@@ -127,7 +134,12 @@ export default function Header(props: {
                 height: "100%",
               }}
             >
-              <Span>
+              <Span
+                onClick={() => {
+                  nav("/");
+                  dispatch(setStatus(false));
+                }}
+              >
                 <Icon className="iconfont icon-exit_fill" />
                 退出
               </Span>

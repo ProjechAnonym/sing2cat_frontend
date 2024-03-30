@@ -24,14 +24,14 @@ function App() {
     <div className="App">
       <ThemeProvider theme={dark ? darkTheme : lightTheme}>
         <Container>
-          <Header
-            onHeight={(e) => setHead(e)}
-            data={[
-              { label: "a", value: [{ label: "b", value: { key: "c" } }] },
-            ]}
-          />
-          <RouteContainer $foot={foot} $head={head}>
-            <BrowserRouter>
+          <BrowserRouter>
+            <Header
+              onHeight={(e) => setHead(e)}
+              data={[
+                { label: "a", value: [{ label: "b", value: { key: "c" } }] },
+              ]}
+            />
+            <RouteContainer $foot={foot} $head={head}>
               <Routes>
                 {routes.map((route, i) => (
                   <Route
@@ -41,9 +41,9 @@ function App() {
                   />
                 ))}
               </Routes>
-            </BrowserRouter>
-          </RouteContainer>
-          <Footer onHeight={(e) => setFoot(e)} />
+            </RouteContainer>
+            <Footer onHeight={(e) => setFoot(e)} />
+          </BrowserRouter>
         </Container>
       </ThemeProvider>
     </div>

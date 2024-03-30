@@ -6,17 +6,25 @@ interface LoadProps {
   zIndex?: number;
   children?: ReactNode;
   style?: CSSProperties;
+  window?: boolean;
+  backgroundColor?: string;
 }
 export const Load: FC<LoadProps> = ({
   open,
   zIndex = 1000,
   children,
   style,
+  window = false,
+  backgroundColor = "#ffffff11",
 }) => {
   return (
     <Container style={style}>
       {open && (
-        <LoadMask zindex={zIndex}>
+        <LoadMask
+          $zindex={zIndex}
+          $window={window}
+          $backgroundColor={backgroundColor}
+        >
           <Spin />
         </LoadMask>
       )}

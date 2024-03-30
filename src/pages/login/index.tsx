@@ -2,17 +2,19 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import { setInit } from "../../slice";
-import { KeepLogin } from "../../utlis/verifySteps";
+import { KeepLogin, LoginMsg } from "../../utlis/verifySteps";
 import { Container, LoginContainer, ButtonContainer, Span } from "./style";
 import { ButtonComponent } from "../../components/button";
 import { Input } from "../../components/input";
 import { Tooltip } from "../../components/toolTip";
+import { Load } from "../../components/load";
 export default function Login() {
   const [password, setPassword] = useState("");
   // loading默认是否,要进行自动登录判断需要获取上一次变化时loading状态
   // 否则一进入登录页面会自动登录
   const [lastLoading, setLastLoading] = useState(false);
-  const [submit, setSubmit] = useState(false);
+
+  const error = useAppSelector((state) => state.identity.error);
   // init用于表示是否登录过退出登录回到此界面
   // 如果没有,那么每次退出登录回到此界面都会进行一次自动登录
   const init = useAppSelector((state) => state.identity.init);
@@ -27,9 +29,7 @@ export default function Login() {
   const nav = useNavigate();
   useEffect(() => {
     // 登录成功则跳转路由
-    if (status) {
-      nav(`/home`);
-    }
+    status && nav("home");
   }, [status]);
 
   useEffect(() => {
@@ -45,14 +45,8 @@ export default function Login() {
       // 只有submit为条件,即表单提交之后,随即进入loading状态
       // 那么在loading时对话框就会弹出,不使用loading而使用上次的加载状态同理
       // 表单提交之后loading为true,直接用loading就会转圈圈的时候弹对话框
-      if (lastLoading && (submit || !status)) {
-        // loading变化后status的结果也出来了
-        if (submit && !status) {
-          console.log("用户名或密码错误");
-        }
-        if (!status && !submit) {
-          console.log("token到期");
-        }
+      if (lastLoading && !status) {
+        console.log(error);
         // 稳一手
         dispatch(setInit(true));
       }
@@ -64,41 +58,42 @@ export default function Login() {
   }, [loading, config]);
   return (
     <Container>
-      <LoginContainer
-        onSubmit={(e) => {
-          e.preventDefault();
-          console.log(password);
-          setSubmit(true);
-        }}
-      >
-        <Span style={{ margin: "5px 0" }}>
-          Secret
-          <Tooltip descripton="请输入密钥" width="5rem">
-            <Span>
-              <i className="bi bi-lock-fill" />
-            </Span>
-          </Tooltip>
-        </Span>
-        <Input
-          style={{ fontSize: "1.2rem", height: "1.5rem" }}
-          width="95%"
-          type="password"
-          onChange={(e) => setPassword(e)}
-        />
-        <ButtonContainer>
-          <ButtonComponent style={{ margin: "5px 5px" }} type="submit">
-            登录
-          </ButtonComponent>
-          <ButtonComponent
-            confirm={false}
-            style={{
-              margin: "5px 5px",
-            }}
-          >
-            重置
-          </ButtonComponent>
-        </ButtonContainer>
-      </LoginContainer>
+      <Load open={loading} window={true}>
+        <LoginContainer
+          onSubmit={(e) => {
+            e.preventDefault();
+            dispatch(LoginMsg({ config: config, password: password }));
+          }}
+        >
+          <Span style={{ margin: "5px 0" }}>
+            Secret
+            <Tooltip descripton="请输入密钥" width="5rem">
+              <Span>
+                <i className="bi bi-lock-fill" />
+              </Span>
+            </Tooltip>
+          </Span>
+          <Input
+            style={{ fontSize: "1.2rem", height: "1.5rem" }}
+            width="95%"
+            type="password"
+            onChange={(e) => setPassword(e)}
+          />
+          <ButtonContainer>
+            <ButtonComponent style={{ margin: "5px 5px" }} type="submit">
+              登录
+            </ButtonComponent>
+            <ButtonComponent
+              confirm={false}
+              style={{
+                margin: "5px 5px",
+              }}
+            >
+              重置
+            </ButtonComponent>
+          </ButtonContainer>
+        </LoginContainer>
+      </Load>
     </Container>
   );
 }

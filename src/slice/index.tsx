@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Action, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { FecthConfig } from "../utlis/fetchConfig";
-
+import { LoginMsg, KeepLogin } from "../utlis/verifySteps";
 export const styleSlice = createSlice({
   name: "style",
   initialState: {
@@ -44,6 +44,37 @@ export const identitySlice = createSlice({
       state.init = action.payload;
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(LoginMsg.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(LoginMsg.fulfilled, (state, action: PayloadAction<string>) => {
+        state.token = action.payload;
+        state.loading = false;
+        state.status = true;
+        localStorage.setItem("token", action.payload);
+      })
+      .addCase(LoginMsg.rejected, (state, action) => {
+        state.error = action.error.message as string;
+        state.loading = false;
+      })
+      .addCase(KeepLogin.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(KeepLogin.fulfilled, (state, action: PayloadAction<string>) => {
+        state.loading = false;
+        if (action.payload !== "") {
+          state.token = action.payload;
+          state.status = true;
+          localStorage.setItem("token", action.payload);
+        }
+      })
+      .addCase(KeepLogin.rejected, (state, action) => {
+        state.error = action.error.message as string;
+        state.loading = false;
+      });
+  },
 });
 export const configSlice = createSlice({
   name: "config",
@@ -63,7 +94,7 @@ export const configSlice = createSlice({
   },
 });
 export const { setDark, setSider } = styleSlice.actions;
-export const { setInit } = identitySlice.actions;
+export const { setInit, setStatus } = identitySlice.actions;
 export const selectConfig = (state: RootState) => state.config.config;
 export const selectToken = (state: RootState) => state.identity.token;
 export const selectError = (state: RootState) => state.identity.error;

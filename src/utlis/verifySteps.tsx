@@ -1,52 +1,46 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  isRejected,
+  isRejectedWithValue,
+} from "@reduxjs/toolkit";
+
 import axios from "axios";
+export const LoginMsg = createAsyncThunk(
+  "identity/Login",
+  async (props: any) => {
+    const formData = new FormData();
+    formData.append("secret", props.password);
+    try {
+      const res = await axios.postForm(
+        `${props.config.API}/user/login`,
+        formData
+      );
+      return res.data.token;
+    } catch (error: any) {
+      throw error.code === "ERR_NETWORK" ? "网络错误" : "密钥错误";
+    }
+  }
+);
 export const KeepLogin = createAsyncThunk(
   "identity/KeepLogin",
   async (config: any) => {
     const token = localStorage.getItem("token");
-    return token === null || token === ""
-      ? () => {
-          localStorage.removeItem("token");
-          return { token: "" };
+    switch (token) {
+      case null:
+        return "";
+      case "":
+        localStorage.removeItem("token");
+        return "";
+      default:
+        try {
+          const res = await axios.get(`${config.API}/user/verify`, {
+            headers: { Authorization: token },
+          });
+          return res.data.token;
+        } catch (error: any) {
+          console.log(error);
+          throw error.code === "ERR_NETWORK" ? "网络错误" : "token过期";
         }
-      : () => {
-          axios
-            .get(`${config.API}/user/valid`, {
-              headers: { Authorization: token },
-            })
-            .then((data) => console.log(data));
-          return { token: "" };
-        };
-    // if (
-    //   // 首先获取存储的token,如果存在则进行登录
-    //   localStorage.getItem("token") !== null
-    // ) {
-    //   const token = localStorage.getItem("token");
-    //   // 避免后端错误返回的结果被存储,再此进行判断
-    //   if (token === "") {
-    //     localStorage.removeItem("id");
-    //     localStorage.removeItem("token");
-    //     return { token: "" };
-    //   } else {
-    //     // 如果token可用则尝试登录
-    //     const validState = await axios.get(`${config.API}/user/valid`, {
-    //       headers: { Authorization: token },
-    //     });
-    //     // 如果状态码正确则说明目前存储的token有效
-    //     if (validState.status === 200) {
-    //       return {
-    //         // 将目前存储的token返回
-    //         token: localStorage.getItem("token"),
-    //       };
-    //     } else {
-    //       // 否则移
-    //       localStorage.removeItem("token");
-    //       return { token: "" };
-    //     }
-    //   }
-    // } else {
-    //   // 为空则直接返回
-    //   return { token: "" };
-    // }
+    }
   }
 );
