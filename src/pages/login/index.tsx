@@ -8,6 +8,7 @@ import { ButtonComponent } from "../../components/button";
 import { Input } from "../../components/input";
 import { Tooltip } from "../../components/toolTip";
 import { Load } from "../../components/load";
+import { Notification } from "@douyinfe/semi-ui";
 export default function Login() {
   const [password, setPassword] = useState("");
   // loading默认是否,要进行自动登录判断需要获取上一次变化时loading状态
@@ -30,7 +31,7 @@ export default function Login() {
   useEffect(() => {
     // 登录成功则跳转路由
     status && nav("home");
-  }, [status]);
+  }, [status, nav]);
 
   useEffect(() => {
     // init为false说明第一次进入此界面,尝试进行自动登录
@@ -46,7 +47,12 @@ export default function Login() {
       // 那么在loading时对话框就会弹出,不使用loading而使用上次的加载状态同理
       // 表单提交之后loading为true,直接用loading就会转圈圈的时候弹对话框
       if (lastLoading && !status) {
-        console.log(error);
+        Notification.error({
+          title: "通知",
+          content: error,
+          duration: 3,
+          theme: "light",
+        });
         // 稳一手
         dispatch(setInit(true));
       }
@@ -88,6 +94,8 @@ export default function Login() {
               style={{
                 margin: "5px 5px",
               }}
+              type="button"
+              onClick={() => nav("/reset")}
             >
               重置
             </ButtonComponent>

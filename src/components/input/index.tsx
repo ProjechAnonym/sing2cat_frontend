@@ -13,6 +13,7 @@ interface inputProps {
   Ref?: RefObject<HTMLInputElement>;
   maxLength?: number;
   minLength?: number;
+  required?: boolean;
 }
 export const Input: FC<inputProps> = ({
   dark = false,
@@ -26,9 +27,11 @@ export const Input: FC<inputProps> = ({
   Ref,
   maxLength,
   minLength,
+  required = false,
 }) => {
   return (
     <InputContainer
+      required={required}
       maxLength={maxLength}
       minLength={minLength}
       ref={Ref}

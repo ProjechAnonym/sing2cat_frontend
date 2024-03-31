@@ -1,8 +1,4 @@
-import {
-  createAsyncThunk,
-  isRejected,
-  isRejectedWithValue,
-} from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import axios from "axios";
 export const LoginMsg = createAsyncThunk(
@@ -38,7 +34,6 @@ export const KeepLogin = createAsyncThunk(
           });
           return res.data.token;
         } catch (error: any) {
-          console.log(error);
           throw error.code === "ERR_NETWORK" ? "网络错误" : "token过期";
         }
     }

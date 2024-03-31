@@ -22,6 +22,7 @@ interface ButtonProps {
   animationFontColor?: string;
   backgroundColor?: string;
   defaultBorderColor?: string;
+  disabled?: boolean;
 }
 export const ButtonComponent: FC<ButtonProps> = ({
   dark = false,
@@ -35,6 +36,7 @@ export const ButtonComponent: FC<ButtonProps> = ({
   defaultBorderColor,
   animationFontColor,
   backgroundColor,
+  disabled,
 }) => {
   const button = useRef<HTMLButtonElement>(null);
   const initHeight = button.current?.offsetHeight;
@@ -49,6 +51,7 @@ export const ButtonComponent: FC<ButtonProps> = ({
   );
   return (
     <Button
+      disabled={disabled}
       $colors={colors}
       $backgroundcolor={
         backgroundColor ? backgroundColor : colors.confirm.backgroundColor

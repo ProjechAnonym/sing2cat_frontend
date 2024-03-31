@@ -10,14 +10,14 @@ export const Container = styled.div`
 
 export const LoginContainer = styled.form`
   background-color: ${(props) => props.theme.colors.container};
-  width: 20rem;
+  width: fit-content;
   height: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;
   backdrop-filter: blur(3px);
   flex-direction: column;
-  padding: 20px;
+  padding: 5px;
   border-radius: 10px;
 `;
 export const Span = styled.span`
