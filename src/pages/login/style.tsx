@@ -10,7 +10,7 @@ export const Container = styled.div`
 
 export const LoginContainer = styled.form`
   background-color: ${(props) => props.theme.colors.container};
-  width: 20rem;
+  width: 18rem;
   height: fit-content;
   display: flex;
   justify-content: center;

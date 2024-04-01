@@ -54,12 +54,13 @@ export const GroupCard = styled.div<{
   color: ${(props) => props.$colors.fontColor};
   font-family: Dingding;
   font-size: ${(props) => props.$fontSize};
-  height: ${(props) => props.$height};
   user-select: none;
   text-align: center;
   width: ${(props) => props.$width};
   background-color: ${(props) => props.$colors.groupCard};
   border-radius: 5px;
+  overflow-x: auto;
+  word-break: break-all;
 `;
 
 export const ItemCard = styled.label<{
@@ -68,12 +69,13 @@ export const ItemCard = styled.label<{
   $height: string;
   $fontSize: string;
 }>`
+  position: relative;
   letter-spacing: 0.2rem;
   display: inline-block;
   background-color: ${(props) => props.$colors.ItemCard};
   font-family: Dingding;
   font-size: ${(props) => props.$fontSize};
-  height: ${(props) => props.$height};
+  word-break: break-all;
   color: ${(props) => props.$colors.fontColor};
   width: ${(props) => props.$width};
   text-align: center;
@@ -121,5 +123,24 @@ export const LabelZone = styled.div<{
   &:hover {
     border-bottom: 2px solid var(--accent-color);
     cursor: pointer;
+  }
+`;
+export const Delete = styled.button<{ $fontSize: string }>`
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  font-size: ${(props) => props.$fontSize};
+  border: none;
+  transform: scale(0.9);
+  transition: 0.2s;
+  background-color: transparent;
+  color: ${(props) => props.theme.colors.fontColor};
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    background-color: #808080b3;
+    border-radius: 3px;
+    padding: 1px;
   }
 `;

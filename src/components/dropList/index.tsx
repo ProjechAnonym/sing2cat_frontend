@@ -14,6 +14,7 @@ import {
   ItemCard,
   LabelZone,
   CollapseIcon,
+  Delete,
 } from "./style";
 import { lightColor, darkColor } from "./colors";
 import { getSearchResult } from "./utils";
@@ -31,6 +32,9 @@ interface DropListProp {
   groupFontSize?: string;
   itemHeight?: string;
   itemFontSize?: string;
+  deleteSize?: string;
+  erasable?: boolean;
+  onDelete?: (data: { label: string; name: string }) => void;
 }
 export const DropList: FC<DropListProp> = ({
   data,
@@ -45,6 +49,9 @@ export const DropList: FC<DropListProp> = ({
   groupFontSize = "1.2rem",
   itemHeight = "1.1rem",
   itemFontSize = "1rem",
+  deleteSize = "0.8rem",
+  erasable = false,
+  onDelete,
 }) => {
   const [items, setItems] = useState(data);
   const [backup, setBackup] = useState(data);
@@ -174,6 +181,16 @@ export const DropList: FC<DropListProp> = ({
                         $width={width}
                         htmlFor={`${item.label}-${ele.label}-${j}`}
                       >
+                        {erasable && (
+                          <Delete
+                            $fontSize={deleteSize}
+                            onClick={() =>
+                              onDelete &&
+                              onDelete({ label: item.label, name: ele.label })
+                            }
+                            className="bi bi-trash-fill"
+                          />
+                        )}
                         {ele.label}
                       </ItemCard>
                     </div>

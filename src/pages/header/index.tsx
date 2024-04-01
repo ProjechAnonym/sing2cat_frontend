@@ -1,25 +1,36 @@
 import { useAppSelector, useAppDispatch } from "../../hooks";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState, SetStateAction } from "react";
 import { useNavigate } from "react-router-dom";
 import Media from "react-media";
 import { setDark, setStatus } from "../../slice";
 import { Toggle } from "../../components/toggle";
+import { Modal } from "../../components/modals/modal";
 import { Container, Img, Span, StyledDropList, Icon } from "./style";
 
 export default function Header(props: {
   data: Array<any>;
   onHeight: (data: number) => void;
+  onDelete?: (data: { label: string; name: string }) => void;
+  erasable?: boolean;
 }) {
   const nav = useNavigate();
   const container = useRef<HTMLDivElement>(null);
   const dark = useAppSelector((state) => state.style.dark);
   const dispatch = useAppDispatch();
-  const { data, onHeight } = props;
+  const { data, onHeight, onDelete, erasable } = props;
+  const [modal, setModal] = useState(false);
+  const [deleteItem, setDeleteItem] = useState<{
+    label: string;
+    name: string;
+  } | null>(null);
   useEffect(() => {
     onHeight(container.current!.offsetHeight);
   }, [container.current?.offsetHeight]);
   return (
     <Container ref={container}>
+      <Modal open={modal} onClose={() => setModal(false)} title="确认删除?">
+        您将要删除{deleteItem?.label}组的{deleteItem?.name},是否确认?
+      </Modal>
       <Img src={require("../../assets/pic/Myfavicon2.ico")} alt="图标" />
       <span
         style={{
@@ -47,7 +58,7 @@ export default function Header(props: {
             >
               <StyledDropList
                 dark={dark}
-                width="3.5rem"
+                width="4rem"
                 itemHeight="1rem"
                 itemFontSize="0.9rem"
                 labelHeight="1.1rem"
@@ -55,6 +66,11 @@ export default function Header(props: {
                 groupHeight="1.1rem"
                 groupFontSize="1rem"
                 data={data}
+                erasable={erasable}
+                onDelete={(data) => {
+                  setModal(true);
+                  setDeleteItem(data);
+                }}
               />
               <Toggle
                 style={{ margin: "auto 0.4rem" }}
@@ -86,6 +102,11 @@ export default function Header(props: {
                 groupHeight="1.2rem"
                 groupFontSize="1.1rem"
                 data={data}
+                erasable={erasable}
+                onDelete={(data) => {
+                  setModal(true);
+                  setDeleteItem(data);
+                }}
               />
               <Toggle
                 style={{ margin: "auto 0.5rem" }}

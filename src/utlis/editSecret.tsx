@@ -25,8 +25,6 @@ export async function editPassword(
     const res = await axios.postForm(`${config.API}/user/reset`, formData);
     return res.status === 200 ? true : false;
   } catch (error: any) {
-    throw error.code === "ERR_NETWORK" || error.code === "ERR_BAD_REQUEST"
-      ? "网络错误"
-      : "验证码或邮箱错误";
+    throw error.code === "ERR_NETWORK" ? "网络错误" : "验证码或邮箱错误";
   }
 }
