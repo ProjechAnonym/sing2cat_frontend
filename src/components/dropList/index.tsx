@@ -20,6 +20,7 @@ import { lightColor, darkColor } from "./colors";
 import { getSearchResult } from "./utils";
 import { Input } from "../input";
 interface DropListProp {
+  zIndex?: number;
   data: Array<any> | undefined;
   style?: CSSProperties;
   dark?: boolean;
@@ -37,6 +38,7 @@ interface DropListProp {
   onDelete?: (data: { label: string; name: string }) => void;
 }
 export const DropList: FC<DropListProp> = ({
+  zIndex = 1000,
   data,
   style,
   dark,
@@ -127,6 +129,7 @@ export const DropList: FC<DropListProp> = ({
       />
 
       <ListContainer
+        $zIndex={zIndex}
         ref={ListZone}
         $visible={visible}
         $exit={exit}

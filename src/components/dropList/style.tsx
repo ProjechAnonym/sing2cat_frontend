@@ -23,7 +23,12 @@ export const CollapseIcon = styled.i<{ $visible: boolean; $color: any }>`
     cursor: pointer;
   }
 `;
-export const ListContainer = styled.div<{ $visible: boolean; $exit: boolean }>`
+export const ListContainer = styled.div<{
+  $visible: boolean;
+  $exit: boolean;
+  $zIndex: number;
+}>`
+  z-index: ${(props) => props.$zIndex};
   border-radius: 5px;
   position: absolute;
   top: calc(100% + 3px);

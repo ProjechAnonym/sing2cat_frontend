@@ -8,8 +8,9 @@ import Sing2cat from "./sing2cat";
 export default function Add() {
   const config = useAppSelector((state) => state.config.config);
   const status = useAppSelector((state) => state.identity.status);
+  const dark = useAppSelector((state) => state.style.dark);
   const dispatch = useAppDispatch();
-  const [element, setElement] = useState<ReactNode>(<Sing2cat />);
+  const [element, setElement] = useState<ReactNode>(<Sing2cat dark={dark} />);
   useEffect(() => {
     Object.keys(config).length !== 0 && !status && dispatch(KeepLogin(config));
   }, [config, status]);
@@ -18,9 +19,10 @@ export default function Add() {
       <AddContainer>
         <Head>
           <DropList
+            dark={dark}
             data={
               Object.keys(config).length !== 0
-                ? formatData(config)
+                ? formatData(config, dark)
                 : [
                     {
                       label: "default",
