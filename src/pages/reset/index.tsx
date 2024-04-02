@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppSelector } from "../../hooks";
+import { useAppSelector, useAppDispatch } from "../../hooks";
+import { setInit } from "../../slice";
 import { Container, LoginContainer, ButtonContainer, Span } from "./style";
 import { ButtonComponent } from "../../components/button";
 import { Input } from "../../components/input";
@@ -16,7 +17,9 @@ export default function Reset() {
   const [load, setLoad] = useState(false);
   const config = useAppSelector((state) => state.config.config);
   const nav = useNavigate();
+  const dispatch = useAppDispatch();
   useEffect(() => {
+    dispatch(setInit(true));
     valid !== 0 &&
       setTimeout(() => {
         setValid(valid - 1);
@@ -95,7 +98,9 @@ export default function Reset() {
           <Input
             style={{ fontSize: "1.2rem", height: "1.5rem" }}
             width="40%"
-            type="number"
+            type="text"
+            maxLength={6}
+            pattern="\d*"
             required={true}
             onChange={(e) => setCaptcha(e)}
             value={captcha}

@@ -1,24 +1,3 @@
 API: "http://127.0.0.1:8085/api"
-HeFengKey: "faadc64a0c684109b8e663bc78c14ccb"
-GaodeKey: "e14b3669510db088755628bab3d63e54"
-geoAPI: "https://restapi.amap.com/v3/ip"
-locationIDAPI: "https://geoapi.qweather.com/v2/city/lookup"
-liveWeatherAPI: "https://devapi.qweather.com/v7/weather/now"
-forcastWeatherAPI: "https://devapi.qweather.com/v7/weather/24h"
-searchEngine:
-  - label: "网站"
-    value:
-      - label: "必应"
-        value: "https://www.bing.com/search?q="
-      - label: "谷歌"
-        value: "https://www.google.com/search?q="
-      - label: "百度"
-        value: "https://www.baidu.com/s?wd="
-  - label: "视频"
-    value:
-      - label: "b站"
-        value: "https://www.bilibili.com/search?q="
-      - label: "油管"
-        value: "https://www.youtube.com/search?q="
-      - label: "github"
-        value: "https://www.github.com/search?q="
+Components:
+  - sing2cat

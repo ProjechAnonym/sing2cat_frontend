@@ -55,3 +55,24 @@ export async function fetchComponents(config: any, token: string) {
     throw error.code === "ERR_NETWORK" ? "网络错误" : "token错误";
   }
 }
+export async function deleteComponents(
+  config: any,
+  token: string,
+  data: { label: string; name: string }
+) {
+  const formData = new FormData();
+  formData.append("app", data.label);
+  formData.append("name", data.name);
+  try {
+    const res = await axios.postForm(
+      `${config.API}/delete/component`,
+      formData,
+      {
+        headers: { Authorization: token },
+      }
+    );
+    return res.status === 200 ? true : false;
+  } catch (error: any) {
+    throw error.code === "ERR_NETWORK" ? "网络错误" : "token错误";
+  }
+}

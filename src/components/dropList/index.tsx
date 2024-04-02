@@ -24,7 +24,7 @@ interface DropListProp {
   style?: CSSProperties;
   dark?: boolean;
   width?: string;
-  onClick?: (data: string) => void;
+  onClick?: (data: any) => void;
   disable?: boolean;
   labelHeight?: string;
   labelFontSize?: string;

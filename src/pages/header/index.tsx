@@ -5,20 +5,26 @@ import Media from "react-media";
 import { setDark, setStatus } from "../../slice";
 import { Toggle } from "../../components/toggle";
 import { Modal } from "../../components/modals/modal";
+import { Load } from "../../components/load";
+import { Notification } from "@douyinfe/semi-ui";
 import { Container, Img, Span, StyledDropList, Icon } from "./style";
-
+import { deleteComponents } from "../../utlis/editComponents";
 export default function Header(props: {
   data: Array<any>;
   onHeight: (data: number) => void;
-  onDelete?: (data: { label: string; name: string }) => void;
+  onDelete?: (status: boolean) => void;
   erasable?: boolean;
 }) {
   const nav = useNavigate();
   const container = useRef<HTMLDivElement>(null);
   const dark = useAppSelector((state) => state.style.dark);
+  const config = useAppSelector((state) => state.config.config);
+  const token = useAppSelector((state) => state.identity.token);
+  const status = useAppSelector((state) => state.identity.status);
   const dispatch = useAppDispatch();
   const { data, onHeight, onDelete, erasable } = props;
   const [modal, setModal] = useState(false);
+  const [deleteStatus, setDeleteStatus] = useState(false);
   const [deleteItem, setDeleteItem] = useState<{
     label: string;
     name: string;
@@ -28,8 +34,45 @@ export default function Header(props: {
   }, [container.current?.offsetHeight]);
   return (
     <Container ref={container}>
-      <Modal open={modal} onClose={() => setModal(false)} title="确认删除?">
-        您将要删除{deleteItem?.label}组的{deleteItem?.name},是否确认?
+      <Modal
+        open={modal}
+        onClose={() => setModal(false)}
+        title="确认删除?"
+        onConfirm={() => {
+          setDeleteStatus(true);
+          deleteComponents(config, token, deleteItem!)
+            .then((status) => {
+              setDeleteStatus(false);
+              setModal(false);
+              onDelete && onDelete(status);
+              status
+                ? Notification.success({
+                    title: "通知",
+                    content: `删除${deleteItem?.label}组${deleteItem?.name}成功`,
+                    duration: 3,
+                    theme: "light",
+                  })
+                : Notification.error({
+                    title: "通知",
+                    content: `删除${deleteItem?.label}组${deleteItem?.name}失败,遭遇未知错误`,
+                    duration: 3,
+                    theme: "light",
+                  });
+            })
+            .catch((error) => {
+              setDeleteStatus(false);
+              Notification.error({
+                title: "通知",
+                content: error,
+                duration: 3,
+                theme: "light",
+              });
+            });
+        }}
+      >
+        <Load open={deleteStatus}>
+          您将要删除{deleteItem?.label}组的{deleteItem?.name},是否确认?
+        </Load>
       </Modal>
       <Img src={require("../../assets/pic/Myfavicon2.ico")} alt="图标" />
       <span
@@ -141,7 +184,18 @@ export default function Header(props: {
                 <Icon className="iconfont icon-exit_fill" />
                 退出
               </Span>
-              <Span>
+              <Span
+                onClick={() =>
+                  status
+                    ? nav("/add")
+                    : Notification.error({
+                        title: "通知",
+                        content: "请先登录",
+                        duration: 3,
+                        theme: "light",
+                      })
+                }
+              >
                 <Icon className="iconfont icon-Additem" />
                 添加
               </Span>
@@ -164,7 +218,18 @@ export default function Header(props: {
                 <Icon className="iconfont icon-exit_fill" />
                 退出
               </Span>
-              <Span>
+              <Span
+                onClick={() =>
+                  status
+                    ? nav("/add")
+                    : Notification.error({
+                        title: "通知",
+                        content: "请先登录",
+                        duration: 3,
+                        theme: "light",
+                      })
+                }
+              >
                 <Icon className="iconfont icon-Additem" />
                 添加
               </Span>

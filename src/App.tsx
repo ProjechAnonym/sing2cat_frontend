@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { FecthConfig } from "./utlis/fetchConfig";
-import { fetchComponents } from "./utlis/fetchComponents";
+import { fetchComponents } from "./utlis/editComponents";
 import { lightTheme, darkTheme } from "./theme";
 import { routes } from "./pages/routes";
 import { ThemeProvider } from "styled-components";
@@ -51,6 +51,7 @@ function App() {
               onHeight={(e) => setHead(e)}
               data={components}
               erasable={components[0].label === "default" ? false : true}
+              onDelete={(status) => status && setFetch(true)}
             />
             <RouteContainer $foot={foot} $head={head}>
               <Routes>

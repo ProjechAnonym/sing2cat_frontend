@@ -6,9 +6,7 @@ export async function sendEmail(email: string, config: any) {
     const res = await axios.postForm(`${config.API}/user/email`, formData);
     return res.status === 200 ? true : false;
   } catch (error: any) {
-    throw error.code === "ERR_NETWORK" || error.code === "ERR_BAD_REQUEST"
-      ? "网络错误"
-      : "非预设邮箱";
+    throw error.code === "ERR_NETWORK" ? "网络错误" : "非预设邮箱";
   }
 }
 export async function editPassword(
