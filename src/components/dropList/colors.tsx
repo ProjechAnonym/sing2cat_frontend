@@ -7,7 +7,7 @@ export const lightColor = {
   ItemHoverCard: "#86B6F6",
 };
 export const darkColor = {
-  backgroundColor: "#787878",
+  backgroundColor: "#636363",
   fontColor: "#f0f8ff",
   groupCard: "#3f3f3f",
   ItemCard: "#7b7b7b",

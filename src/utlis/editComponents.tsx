@@ -17,7 +17,13 @@ export async function fetchComponents(config: any, token: string) {
                 value: [
                   {
                     label: item.name,
-                    value: { url: item.url, icon: item.icon, data: item.data },
+                    value: {
+                      genre: item.class,
+                      url: item.url,
+                      icon: item.icon,
+                      data: item.data,
+                      name: item.name,
+                    },
                   },
                 ],
               })
@@ -26,9 +32,11 @@ export async function fetchComponents(config: any, token: string) {
                   ? component.value.push({
                       label: item.name,
                       value: {
+                        genre: item.class,
                         url: item.url,
                         icon: item.icon,
                         data: item.data,
+                        name: item.name,
                       },
                     })
                   : components.push({

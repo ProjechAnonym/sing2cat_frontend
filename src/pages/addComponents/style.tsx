@@ -7,6 +7,7 @@ export const Container = styled.div`
   align-items: center;
 `;
 export const AddContainer = styled.div`
+  font-family: Dingding;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,23 +25,24 @@ export const Head = styled.div`
   align-items: center;
   border-bottom: 2px solid ${(props) => props.theme.border.cardColor};
 `;
-export const AddContent = styled.div`
+export const AddContent = styled.form`
   height: 85%;
   width: 96%;
   margin: 0.5rem auto;
 `;
+
 export const DefaultContent = styled.div`
   width: 100%;
   height: fit-content;
   display: flex;
 `;
 export const InputField = styled.div`
-  padding: 2px;
+  padding: 1px;
   width: fit-content;
-  height: fit-content;
+  height: 2.9rem;
   display: flex;
   flex-direction: column;
-  margin: 0.3rem;
+  margin-top: 0.3rem;
 `;
 export const Span = styled.span`
   font-family: Dingding;
@@ -60,4 +62,10 @@ export const Img = styled.img`
   border: 2px solid ${(props) => props.theme.border.cardColor};
   border-radius: 8px;
   margin: 2px 0;
+  font-family: Dingding;
+`;
+export const CustomContainer = styled.div<{ $restHeight?: number }>`
+  width: 100%;
+  margin: 0.3rem auto;
+  height: calc(100% - ${(props) => props.$restHeight}px);
 `;

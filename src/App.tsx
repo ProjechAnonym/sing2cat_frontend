@@ -4,11 +4,12 @@ import { useAppDispatch, useAppSelector } from "./hooks";
 import { FecthConfig } from "./utlis/fetchConfig";
 import { fetchComponents } from "./utlis/editComponents";
 import { lightTheme, darkTheme } from "./theme";
-import { routes } from "./pages/routes";
+import { routes, switchComponent } from "./pages/routes";
 import { ThemeProvider } from "styled-components";
 import { Container, RouteContainer } from "./pages/container";
 import Footer from "./pages/footer";
 import Header from "./pages/header";
+import Home from "./pages/home";
 import { Notification } from "@douyinfe/semi-ui";
 import "./assets/fonts/fonts.css";
 function App() {
@@ -19,12 +20,23 @@ function App() {
   const [components, setComponents] = useState([
     { label: "default", value: [{ label: "None", value: null }] },
   ]);
+  const [value, setValue] = useState<{
+    url: string;
+    genre: string;
+    icon: string;
+    data: any;
+    name: string;
+  } | null>(null);
   const config = useAppSelector((state) => state.config.config);
   const dark = useAppSelector((state) => state.style.dark);
   const status = useAppSelector((state) => state.identity.status);
   const token = useAppSelector((state) => state.identity.token);
   useEffect(() => {
     Object.keys(config).length === 0 && dispatch(FecthConfig());
+    !status &&
+      setComponents([
+        { label: "default", value: [{ label: "None", value: null }] },
+      ]);
     status &&
       fetch &&
       fetchComponents(config, token)
@@ -48,6 +60,7 @@ function App() {
         <Container>
           <BrowserRouter>
             <Header
+              onClick={(value) => setValue(value)}
               onHeight={(e) => setHead(e)}
               data={components}
               erasable={components[0].label === "default" ? false : true}
@@ -59,9 +72,17 @@ function App() {
                   <Route
                     path={route.path}
                     key={`${route.name}-${i}`}
-                    element={route.component}
+                    element={switchComponent(
+                      route.name,
+                      (e) => e && setFetch(true)
+                    )}
                   />
                 ))}
+                <Route
+                  path={"/home"}
+                  key={`home-1`}
+                  element={<Home value={value} />}
+                />
               </Routes>
             </RouteContainer>
             <Footer onHeight={(e) => setFoot(e)} />

@@ -14,6 +14,7 @@ interface inputProps {
   maxLength?: number;
   minLength?: number;
   required?: boolean;
+  placeholder?: string;
 }
 export const Input: FC<inputProps> = ({
   dark = false,
@@ -28,9 +29,11 @@ export const Input: FC<inputProps> = ({
   maxLength,
   minLength,
   required = false,
+  placeholder = "",
 }) => {
   return (
     <InputContainer
+      placeholder={placeholder}
       required={required}
       maxLength={maxLength}
       minLength={minLength}

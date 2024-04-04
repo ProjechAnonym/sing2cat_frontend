@@ -1,7 +1,7 @@
 import styled from "styled-components";
-export const Container = styled.div`
-  height: 85%;
-  width: 96%;
+export const CustomContainer = styled.form`
+  width: 100%;
   background-color: rebeccapurple;
   margin: 0.3rem auto;
+  height: fit-content;
 `;

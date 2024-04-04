@@ -10,8 +10,8 @@ export const StyledDropList = styled(DropList)`
 `;
 export const Icon = styled.i`
   @media screen and (min-width: 360px) and (max-width: 489px) {
-    margin: 0 2px;
-    font-size: 1rem;
+    margin: 0 1px;
+    font-size: 0.8rem;
   }
   @media screen and (min-width: 490px) {
     margin: 0 2px;
@@ -35,8 +35,8 @@ export const Img = styled.img`
 `;
 export const Span = styled.span`
   @media screen and (min-width: 360px) and (max-width: 489px) {
-    font-size: 1rem;
-    margin: auto 3px;
+    font-size: 0.8rem;
+    margin: auto 1px;
   }
   @media screen and (min-width: 490px) {
     font-size: 1.5rem;

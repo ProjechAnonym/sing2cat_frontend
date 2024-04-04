@@ -4,13 +4,16 @@ import { formatData } from "./utils";
 import { KeepLogin } from "../../utlis/verifySteps";
 import { Container, AddContainer, Head } from "./style";
 import { DropList } from "../../components/dropList";
-import Sing2cat from "./sing2cat";
-export default function Add() {
+export default function Add(props: { onAdd: (status: boolean) => void }) {
+  const { onAdd } = props;
   const config = useAppSelector((state) => state.config.config);
   const status = useAppSelector((state) => state.identity.status);
   const dark = useAppSelector((state) => state.style.dark);
+  const token = useAppSelector((state) => state.identity.token);
   const dispatch = useAppDispatch();
-  const [element, setElement] = useState<ReactNode>(<Sing2cat dark={dark} />);
+  const [element, setElement] = useState<ReactNode>(
+    <AddContainer>请选择要添加的组件</AddContainer>
+  );
   useEffect(() => {
     Object.keys(config).length !== 0 && !status && dispatch(KeepLogin(config));
   }, [config, status]);
@@ -21,8 +24,8 @@ export default function Add() {
           <DropList
             dark={dark}
             data={
-              Object.keys(config).length !== 0
-                ? formatData(config, dark)
+              Object.keys(config).length !== 0 && token
+                ? formatData(config, dark, (status) => onAdd(status), token)
                 : [
                     {
                       label: "default",

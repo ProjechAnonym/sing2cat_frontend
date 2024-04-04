@@ -14,6 +14,13 @@ export default function Header(props: {
   onHeight: (data: number) => void;
   onDelete?: (status: boolean) => void;
   erasable?: boolean;
+  onClick: (value: {
+    url: string;
+    genre: string;
+    icon: string;
+    data: any;
+    name: string;
+  }) => void;
 }) {
   const nav = useNavigate();
   const container = useRef<HTMLDivElement>(null);
@@ -22,7 +29,7 @@ export default function Header(props: {
   const token = useAppSelector((state) => state.identity.token);
   const status = useAppSelector((state) => state.identity.status);
   const dispatch = useAppDispatch();
-  const { data, onHeight, onDelete, erasable } = props;
+  const { data, onHeight, onDelete, erasable, onClick } = props;
   const [modal, setModal] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState(false);
   const [deleteItem, setDeleteItem] = useState<{
@@ -74,19 +81,21 @@ export default function Header(props: {
           您将要删除{deleteItem?.label}组的{deleteItem?.name},是否确认?
         </Load>
       </Modal>
-      <Img src={require("../../assets/pic/Myfavicon2.ico")} alt="图标" />
-      <span
-        style={{
-          userSelect: "none",
-          fontFamily: "Dingding",
-          fontSize: "1.5rem",
-          fontWeight: "bolder",
-          color: "#0080ff",
-          margin: "0 3px",
-        }}
-      >
-        sifulin
-      </span>
+      <div style={{ display: "flex" }}>
+        <Img src={require("../../assets/pic/Myfavicon2.ico")} alt="图标" />
+        <span
+          style={{
+            userSelect: "none",
+            fontFamily: "Dingding",
+            fontSize: "1.5rem",
+            fontWeight: "bolder",
+            color: "#0080ff",
+            margin: "0 3px",
+          }}
+        >
+          sifulin
+        </span>
+      </div>
       <Media query="(min-width: 360px) and (max-width: 489px)">
         {(matches) =>
           matches ? (
@@ -114,6 +123,7 @@ export default function Header(props: {
                   setModal(true);
                   setDeleteItem(data);
                 }}
+                onClick={(data) => onClick(data)}
               />
               <Toggle
                 style={{ margin: "auto 0.4rem" }}
@@ -150,6 +160,7 @@ export default function Header(props: {
                   setModal(true);
                   setDeleteItem(data);
                 }}
+                onClick={(data) => onClick(data)}
               />
               <Toggle
                 style={{ margin: "auto 0.5rem" }}
@@ -199,6 +210,21 @@ export default function Header(props: {
                 <Icon className="iconfont icon-Additem" />
                 添加
               </Span>
+              <Span
+                onClick={() => {
+                  status
+                    ? nav("/home")
+                    : Notification.error({
+                        title: "通知",
+                        content: "请先登录",
+                        duration: 3,
+                        theme: "light",
+                      });
+                }}
+              >
+                <Icon className="iconfont icon-shouye" />
+                首页
+              </Span>
             </div>
           ) : (
             <div
@@ -232,6 +258,21 @@ export default function Header(props: {
               >
                 <Icon className="iconfont icon-Additem" />
                 添加
+              </Span>
+              <Span
+                onClick={() => {
+                  status
+                    ? nav("/home")
+                    : Notification.error({
+                        title: "通知",
+                        content: "请先登录",
+                        duration: 3,
+                        theme: "light",
+                      });
+                }}
+              >
+                <Icon className="iconfont icon-shouye" />
+                首页
               </Span>
             </div>
           )
