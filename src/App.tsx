@@ -72,17 +72,15 @@ function App() {
                   <Route
                     path={route.path}
                     key={`${route.name}-${i}`}
-                    element={switchComponent(
-                      route.name,
-                      (e) => e && setFetch(true)
-                    )}
+                    element={
+                      route.name === "home" ? (
+                        <Home value={value} />
+                      ) : (
+                        switchComponent(route.name, (e) => e && setFetch(true))
+                      )
+                    }
                   />
                 ))}
-                <Route
-                  path={"/home"}
-                  key={`home-1`}
-                  element={<Home value={value} />}
-                />
               </Routes>
             </RouteContainer>
             <Footer onHeight={(e) => setFoot(e)} />

@@ -18,6 +18,7 @@ export const MsgContainer = styled.div`
   justify-content: center;
   align-content: center;
   padding: 3px 0;
+  user-select: none;
 `;
 export const Msg = styled.p`
   width: fit-content;

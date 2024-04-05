@@ -5,6 +5,7 @@ export const routes = [
   { path: "/", name: "login" },
   { path: "/reset", name: "reset" },
   { path: "/add", name: "add" },
+  { path: "/home", name: "home" },
 ];
 export function switchComponent(
   component: string,

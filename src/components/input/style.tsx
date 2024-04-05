@@ -4,10 +4,7 @@ export const InputContainer = styled.input<{ $width: string; $colors: any }>`
   border: none;
   --accent-color: #63a0cf;
   border-radius: 5px 5px 0px 0px;
-  background-color: ${(props) =>
-    Object.keys(props.theme).length
-      ? props.theme.colors.card
-      : props.$colors.backgroundColor};
+  background-color: ${(props) => props.$colors.backgroundColor};
   transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
   transition-duration: 200ms;
   transition-property: background-color;

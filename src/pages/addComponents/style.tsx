@@ -6,8 +6,19 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
 `;
-export const AddContainer = styled.div`
+export const DefaultAddContainer = styled.div`
   font-family: Dingding;
+  color: ${(props) => props.theme.colors.fontColor};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20rem;
+  height: 30rem;
+  border-radius: 10px;
+  padding: 3px;
+  background-color: ${(props) => props.theme.colors.container};
+`;
+export const AddContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

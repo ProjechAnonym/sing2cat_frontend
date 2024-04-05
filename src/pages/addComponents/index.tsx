@@ -2,7 +2,7 @@ import { useEffect, useState, ReactNode } from "react";
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import { formatData } from "./utils";
 import { KeepLogin } from "../../utlis/verifySteps";
-import { Container, AddContainer, Head } from "./style";
+import { Container, AddContainer, Head, DefaultAddContainer } from "./style";
 import { DropList } from "../../components/dropList";
 export default function Add(props: { onAdd: (status: boolean) => void }) {
   const { onAdd } = props;
@@ -12,7 +12,7 @@ export default function Add(props: { onAdd: (status: boolean) => void }) {
   const token = useAppSelector((state) => state.identity.token);
   const dispatch = useAppDispatch();
   const [element, setElement] = useState<ReactNode>(
-    <AddContainer>请选择要添加的组件</AddContainer>
+    <DefaultAddContainer>请选择要添加的组件</DefaultAddContainer>
   );
   useEffect(() => {
     Object.keys(config).length !== 0 && !status && dispatch(KeepLogin(config));
