@@ -2,7 +2,7 @@ import styled from "styled-components";
 export const Icon = styled.i`
   position: absolute;
   right: 12px;
-  bottom: -2px;
+  bottom: -5px;
   background-color: #90909027;
   backdrop-filter: blur(1px);
   border-radius: 3px;
