@@ -32,7 +32,7 @@ interface ModalProps {
 export const Modal: FC<ModalProps> = ({
   maskClose = true,
   open,
-  width = "20rem",
+  width = "18rem",
   height = "30rem",
   dark = false,
   title = "模态对话框",

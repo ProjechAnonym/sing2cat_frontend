@@ -15,6 +15,8 @@ interface inputProps {
   minLength?: number;
   required?: boolean;
   placeholder?: string;
+  min?: number;
+  max?: number;
 }
 export const Input: FC<inputProps> = ({
   dark = false,
@@ -30,6 +32,8 @@ export const Input: FC<inputProps> = ({
   minLength,
   required = false,
   placeholder = "",
+  min = 0,
+  max = 60,
 }) => {
   return (
     <InputContainer
@@ -46,6 +50,8 @@ export const Input: FC<inputProps> = ({
       $width={width}
       $colors={dark ? darkColor : lightColor}
       style={style}
+      min={min}
+      max={max}
     ></InputContainer>
   );
 };

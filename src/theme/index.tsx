@@ -22,9 +22,9 @@ const lightTheme: DefaultTheme = {
 const darkTheme: DefaultTheme = {
   border: {
     container: "2px solid #D8D8D8",
-    card: "2px solid #D8D8D8",
+    card: "2px solid #a0a0a0",
     containerColor: "#D8D8D8",
-    cardColor: "#D8D8D8",
+    cardColor: "#a0a0a0",
   },
   shadow: {
     container: "3px 3px 5px #F0F0F0",
@@ -33,9 +33,9 @@ const darkTheme: DefaultTheme = {
     cardColor: "#F0F0F0",
   },
   colors: {
-    backgroundColor: "#313131",
-    container: "#525252",
-    card: "#626262",
+    backgroundColor: "#303030",
+    container: "#404040",
+    card: "#505050",
     fontColor: "#f0f8ff",
   },
 };

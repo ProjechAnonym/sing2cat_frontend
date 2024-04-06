@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { AddContent } from "../style";
 import { Content } from "../content";
 import { CustomContainer, Icon, InputField, Span } from "../style";

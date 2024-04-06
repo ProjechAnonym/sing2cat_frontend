@@ -90,24 +90,44 @@ export const PopModal: FC<PopModalProps> = ({
             <ModalHead>
               <span
                 style={{
-                  width: "90%",
+                  width: "100%",
                   fontFamily: "Dingding",
+                  display: "flex",
+                  justifyContent: "start",
                 }}
               >
                 {title}
               </span>
             </ModalHead>
           )}
-          <div style={{ fontFamily: "Dingding" }}>{description}</div>
+          <div
+            style={{
+              fontFamily: "Dingding",
+            }}
+          >
+            {description}
+          </div>
           <ModalFoot>
             {foot ? (
               foot
             ) : (
-              <div style={{ gap: "20px", display: "flex" }}>
-                <ButtonComponent onClick={() => onConfirm && onConfirm()}>
+              <div
+                style={{
+                  gap: "10px",
+                  display: "flex",
+                }}
+              >
+                <ButtonComponent
+                  onClick={() => onConfirm && onConfirm()}
+                  type="button"
+                >
                   确认
                 </ButtonComponent>
-                <ButtonComponent onClick={() => setExit(true)} confirm={false}>
+                <ButtonComponent
+                  type="button"
+                  onClick={() => setExit(true)}
+                  confirm={false}
+                >
                   取消
                 </ButtonComponent>
               </div>

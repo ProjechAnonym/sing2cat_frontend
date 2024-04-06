@@ -8,7 +8,8 @@ export const ComponentMsg = styled.div`
   width: 100%;
   height: fit-content;
   display: flex;
-  margin: 23px 0 0 0;
+  margin: 10px 0;
+  overflow-x: auto;
 `;
 export const MsgImg = styled.img`
   height: 3.2rem;

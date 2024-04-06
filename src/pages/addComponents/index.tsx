@@ -1,5 +1,6 @@
 import { useEffect, useState, ReactNode } from "react";
 import { useAppSelector, useAppDispatch } from "../../hooks";
+import { setInit } from "../../slice";
 import { formatData } from "./utils";
 import { KeepLogin } from "../../utlis/verifySteps";
 import { Container, AddContainer, Head, DefaultAddContainer } from "./style";
@@ -16,6 +17,7 @@ export default function Add(props: { onAdd: (status: boolean) => void }) {
   );
   useEffect(() => {
     Object.keys(config).length !== 0 && !status && dispatch(KeepLogin(config));
+    dispatch(setInit(true));
   }, [config, status]);
   return (
     <Container>
