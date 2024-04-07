@@ -36,7 +36,13 @@ export default function Sing2catComponent(props: {
     hour: string | null;
     minute: string | null;
   }>(IntervalTip(week, hour, minute));
+  const [links, setLinks] = useState<Array<string>>([""]);
+  const [sets, setSets] = useState<Array<{
+    label: string;
+    value: { type: string; path: string; china: boolean };
+  }> | null>(null);
   const weekDay = useRef<HTMLInputElement>(null);
+  const configButton = useRef<HTMLButtonElement>(null);
   const dark = useAppSelector((state) => state.style.dark);
   useEffect(() => {
     if (api && check) {
@@ -102,8 +108,30 @@ export default function Sing2catComponent(props: {
   }, [check, restart, week, hour, minute]);
   return (
     <Container>
-      <Modal open={configModal} onClose={() => setConfigModal(false)}>
-        <Config dark={dark} />
+      <Modal
+        title="重置配置文件"
+        open={configModal}
+        onClose={() => setConfigModal(false)}
+        onConfirm={() => configButton.current?.click()}
+      >
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            console.log(links);
+            console.log(sets);
+          }}
+        >
+          <Config
+            dark={dark}
+            onChangeLinks={(links) => setLinks(links)}
+            onChangeSets={(sets) => setSets(sets)}
+          />
+          <button
+            style={{ display: "none" }}
+            ref={configButton}
+            type="submit"
+          />
+        </form>
       </Modal>
       <Modal
         open={intervalModal}

@@ -26,8 +26,15 @@ export const MsgContainer = styled.div`
   width: 100%;
   height: 45%;
   border: 2px solid ${(props) => props.theme.border.cardColor};
-  border-radius: 15px;
+  border-radius: 10px;
   background-color: ${(props) => props.theme.colors.card};
   margin: 1rem 0;
   overflow-y: auto;
+`;
+export const SetsContainer = styled.div`
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
 `;

@@ -14,8 +14,8 @@ const lightTheme: DefaultTheme = {
   },
   colors: {
     backgroundColor: "#e2fffb",
-    container: "#cffdff",
-    card: "#EFFFFD",
+    container: "#d3f2fd",
+    card: "#cffdff",
     fontColor: "#323232",
   },
 };
