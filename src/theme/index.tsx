@@ -9,7 +9,7 @@ const lightTheme: DefaultTheme = {
   shadow: {
     container: "5px 5px 4px #90a8ff",
     card: "5px 5px 5px #BBE1FA",
-    containerColor: "#cdf1ff",
+    containerColor: "#b5e9fd",
     cardColor: "#BBE1FA",
   },
   colors: {

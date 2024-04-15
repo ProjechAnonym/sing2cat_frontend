@@ -43,7 +43,7 @@ export const Anchor: FC<AnchorProps> = ({
   width = "3rem",
 }) => {
   const [select, setSelect] = useState(`${data[0].title}-0`);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [exit, setExit] = useState(false);
   const handleScroll = useCallback(() => {
     const eleHeight = GetHrefEle(data);
@@ -110,7 +110,6 @@ export const Anchor: FC<AnchorProps> = ({
               }
               $fontColor={dark ? darkColor.fontColor : lightColor.fontColor}
               $fontSize={fontSize}
-              $height={height}
               href={part.onClick}
               key={`${part.title}-${i}`}
               $selected={select === `${part.title}-${i}`}
@@ -136,7 +135,6 @@ export const Anchor: FC<AnchorProps> = ({
               }
               $fontColor={dark ? darkColor.fontColor : lightColor.fontColor}
               $fontSize={fontSize}
-              $height={height}
               $selected={select === `${part.title}-${i}`}
               key={`${part.title}-${i}`}
               onClick={(e) => {

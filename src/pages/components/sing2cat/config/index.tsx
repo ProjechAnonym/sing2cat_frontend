@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ComponentMsg, MsgCard, MsgSpan } from "../../style";
+import { MsgSpan } from "../../style";
 import {
   Icon,
   Container,

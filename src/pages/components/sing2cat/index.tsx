@@ -1,14 +1,23 @@
 import { useState, useEffect, useRef } from "react";
 import { useAppSelector } from "../../../hooks";
 import { CheckStatus, RestartApp } from "../utils";
-import { WeekDay, IntervalTip, EditInterval } from "./utils";
+import {
+  WeekDay,
+  IntervalTip,
+  EditInterval,
+  RenewConfig,
+  FetchProxies,
+  RenewDelay,
+  ChangeProxy,
+} from "./utils";
 import { Container, MsgImg, ComponentMsg, MsgSpan, MsgCard } from "../style";
 import { Icon, StatusIcon, IntervalContainer } from "./style";
 import { Input } from "../../../components/input";
 import { ButtonComponent } from "../../../components/button";
-import Config from "./config";
 import { Modal } from "../../../components/modals/modal";
 import { Notification } from "@douyinfe/semi-ui";
+import Config from "./config";
+import Proxies from "./proxies";
 export default function Sing2catComponent(props: {
   value: {
     url: string;
@@ -27,6 +36,9 @@ export default function Sing2catComponent(props: {
   const [mosdns, setMosdns] = useState(true);
   const [check, setCheck] = useState(true);
   const [restart, setRestart] = useState(false);
+  const [proxies, setProxies] = useState<{
+    proxies: any;
+  } | null>(null);
   const [week, setWeek] = useState<string | null>(null);
   const [hour, setHour] = useState<string | null>(null);
   const [minute, setMinute] = useState<string | null>(null);
@@ -43,6 +55,7 @@ export default function Sing2catComponent(props: {
   }> | null>(null);
   const weekDay = useRef<HTMLInputElement>(null);
   const configButton = useRef<HTMLButtonElement>(null);
+  const Head = useRef<HTMLDivElement>(null);
   const dark = useAppSelector((state) => state.style.dark);
   useEffect(() => {
     if (api && check) {
@@ -54,7 +67,7 @@ export default function Sing2catComponent(props: {
           error
             ? Notification.error({
                 title: "通知",
-                content: "网络错误",
+                content: "检测sing-box失败,网络错误",
                 duration: 2,
                 theme: "light",
               })
@@ -66,7 +79,7 @@ export default function Sing2catComponent(props: {
           error
             ? Notification.error({
                 title: "通知",
-                content: "网络错误",
+                content: "检测mosdns失败,网络错误",
                 duration: 2,
                 theme: "light",
               })
@@ -83,7 +96,7 @@ export default function Sing2catComponent(props: {
           error
             ? Notification.error({
                 title: "通知",
-                content: "网络错误",
+                content: "重启sing-box失败,网络错误",
                 duration: 2,
                 theme: "light",
               })
@@ -95,7 +108,7 @@ export default function Sing2catComponent(props: {
           error
             ? Notification.error({
                 title: "通知",
-                content: "网络错误",
+                content: "重启mosdns失败,网络错误",
                 duration: 2,
                 theme: "light",
               })
@@ -105,7 +118,27 @@ export default function Sing2catComponent(props: {
     }
     weekDay.current && (weekDay.current.value = WeekDay(week as string));
     setInterval(IntervalTip(week, hour, minute));
-  }, [check, restart, week, hour, minute]);
+    !proxies &&
+      FetchProxies(value.url, value.data.token)
+        .then((data) => {
+          data.status
+            ? setProxies(data.data)
+            : Notification.error({
+                theme: "light",
+                duration: 3,
+                content: "获取节点信息失败,遭遇未知错误",
+                title: "通知",
+              });
+        })
+        .catch((error) =>
+          Notification.error({
+            theme: "light",
+            duration: 3,
+            content: `获取节点信息失败,${error}`,
+            title: "通知",
+          })
+        );
+  }, [check, restart, week, hour, minute, proxies]);
   return (
     <Container>
       <Modal
@@ -117,8 +150,20 @@ export default function Sing2catComponent(props: {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            console.log(links);
-            console.log(sets);
+            RenewConfig(api!, token, links, sets)
+              .then((status) => {
+                status && setTimeout(() => setProxies(null), 1000);
+                setConfigModal(false);
+              })
+              .catch((error: any) => {
+                console.error(error);
+                Notification.error({
+                  title: "通知",
+                  content: "生成配置文件失败,遭遇未知错误",
+                  duration: 3,
+                  theme: "light",
+                });
+              });
           }}
         >
           <Config
@@ -143,13 +188,13 @@ export default function Sing2catComponent(props: {
               data
                 ? Notification.success({
                     theme: "light",
-                    content: "更新成功",
+                    content: "更新定时任务成功",
                     title: "通知",
                     duration: 3,
                   })
                 : Notification.error({
                     theme: "light",
-                    content: "未知错误",
+                    content: "更新定时任务失败,遭遇未知错误",
                     title: "通知",
                     duration: 3,
                   })
@@ -157,7 +202,7 @@ export default function Sing2catComponent(props: {
             .catch((error) =>
               Notification.error({
                 theme: "light",
-                content: error,
+                content: `更新定时任务失败,${error}`,
                 title: "通知",
                 duration: 3,
               })
@@ -167,7 +212,7 @@ export default function Sing2catComponent(props: {
       >
         {interval.content}
       </Modal>
-      <ComponentMsg>
+      <ComponentMsg ref={Head}>
         {value.icon !== "" && <MsgImg src={value.icon}></MsgImg>}
         <MsgCard>
           <MsgSpan style={{ fontSize: "1rem" }}>{value.genre}</MsgSpan>
@@ -213,7 +258,7 @@ export default function Sing2catComponent(props: {
                     error
                       ? Notification.error({
                           title: "通知",
-                          content: "网络错误",
+                          content: "查看sing-box失败,网络错误",
                           duration: 2,
                           theme: "light",
                         })
@@ -236,7 +281,7 @@ export default function Sing2catComponent(props: {
                     error
                       ? Notification.error({
                           title: "通知",
-                          content: "网络错误",
+                          content: "重启sing-box失败,网络错误",
                           duration: 2,
                           theme: "light",
                         })
@@ -266,7 +311,7 @@ export default function Sing2catComponent(props: {
                     error
                       ? Notification.error({
                           title: "通知",
-                          content: "网络错误",
+                          content: "查看mosdns失败,网络错误",
                           duration: 2,
                           theme: "light",
                         })
@@ -289,7 +334,7 @@ export default function Sing2catComponent(props: {
                     error
                       ? Notification.error({
                           title: "通知",
-                          content: "网络错误",
+                          content: "重启mosdns失败,网络错误",
                           duration: 2,
                           theme: "light",
                         })
@@ -390,6 +435,26 @@ export default function Sing2catComponent(props: {
           </ButtonComponent>
         </MsgSpan>
       </ComponentMsg>
+      <Proxies
+        onChangeProxy={(group, name) => {
+          ChangeProxy(group, name, value.url, value.data.token, proxies)
+            .then((proxies) => setProxies(proxies))
+            .catch((error) => console.error(error));
+        }}
+        onGroupDelay={(name, group) => {
+          RenewDelay(group, name, value.url, value.data.token, proxies)
+            .then((proxies) => setProxies(proxies))
+            .catch((error) => console.error(error));
+        }}
+        onProxyDelay={(name, group) => {
+          RenewDelay(group, name, value.url, value.data.token, proxies)
+            .then((proxies) => setProxies(proxies))
+            .catch((error) => console.error(error));
+        }}
+        proxies={proxies}
+        height={Head.current?.offsetHeight}
+        dark={dark}
+      ></Proxies>
     </Container>
   );
 }

@@ -7,7 +7,7 @@ export function GetHrefEle(
   const rectDatas = cloneDatas.map((data, i) => {
     if (typeof data.onClick === "string") {
       const { top, bottom } = document
-        .getElementById((data.onClick as string).substring(1))
+        .getElementById(data.onClick as string)
         ?.getBoundingClientRect()!;
       return { key: `${data.title}-${i}`, size: [top, bottom] };
     } else {
@@ -20,7 +20,7 @@ export function GetHrefEle(
   }>;
 }
 export async function Scroll2Ele(id: string) {
-  document.getElementById(id.substring(1))?.scrollIntoView({
+  document.getElementById(id)?.scrollIntoView({
     block: "start",
     inline: "nearest",
     behavior: "smooth",

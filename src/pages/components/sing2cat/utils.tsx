@@ -1,5 +1,6 @@
 import axios from "axios";
-import { Notification } from "@douyinfe/semi-ui";
+import { url } from "inspector";
+import { cloneDeep } from "lodash";
 export function WeekDay(num: string) {
   switch (num) {
     case "0":
@@ -72,5 +73,100 @@ export async function EditInterval(
     return res.status === 200 ? true : false;
   } catch (error: any) {
     throw error.code === "ERR_NETWORK" ? "网络错误" : "更新失败";
+  }
+}
+export async function RenewConfig(
+  api: string,
+  token: string,
+  links: Array<string>,
+  sets: Array<{
+    label: string;
+    value: { type: string; china: boolean; path: string };
+  }> | null
+) {
+  try {
+    const res = await axios({
+      method: "post",
+      url: `${api}/sing2cat/config`,
+      headers: { Authorization: token },
+      data: { url: links, rule_set: sets },
+    });
+    return res.status === 200 ? true : false;
+  } catch (error: any) {
+    throw error.code === "ERR_NETWORK" ? "网络错误" : error;
+  }
+}
+export async function FetchProxies(url: string, token: string) {
+  try {
+    const res = await axios.get(`${url}/proxies`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    return res.status === 200
+      ? { status: true, data: res.data.proxies }
+      : { status: false };
+  } catch (error: any) {
+    throw error.code === "ERR_NETWORK" ? "网络错误" : "获取节点失败";
+  }
+}
+export async function RenewDelay(
+  group: boolean,
+  name: string,
+  url: string,
+  secret: string,
+  proxies: any
+) {
+  try {
+    const res = group
+      ? await axios({
+          url: `${url}/group/${encodeURI(name)}/delay`,
+          params: {
+            timeout: 5000,
+            url: "https://www.gstatic.com?generate_204",
+          },
+          method: "get",
+          headers: { Authorization: `Bearer ${secret}` },
+        })
+      : await axios({
+          url: `${url}/proxies/${encodeURI(name)}/delay`,
+          params: {
+            timeout: 5000,
+            url: "https://www.gstatic.com?generate_204",
+          },
+          method: "get",
+          headers: { Authorization: `Bearer ${secret}` },
+        });
+    const newProxies = cloneDeep(proxies);
+    group && res.status === 200
+      ? Object.keys(res.data).forEach((proxy) => {
+          newProxies[proxy].history = [{ delay: res.data[proxy] }];
+        })
+      : (newProxies[name].history = [{ delay: res.data.delay }]);
+    return newProxies;
+  } catch (error: any) {
+    throw error.code === "ERR_NETWORK" ? "网络错误" : error;
+  }
+}
+export async function ChangeProxy(
+  group: string,
+  name: string,
+  url: string,
+  secret: string,
+  proxies: any
+) {
+  try {
+    const res = await axios({
+      url: `${url}/proxies/${encodeURI(group)}`,
+      headers: { Authorization: `Bearer ${secret}` },
+      data: { name: name },
+      method: "put",
+    });
+    const newProxies = cloneDeep(proxies);
+    res.status === 204
+      ? (newProxies[group].now = name)
+      : (newProxies[group].now = newProxies[group].now);
+    return newProxies;
+  } catch (error: any) {
+    throw error.code === "ERR_NETWORK" ? "网络错误" : error;
   }
 }

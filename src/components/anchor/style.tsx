@@ -73,7 +73,6 @@ export const Span = styled.span`
 `;
 export const Href = styled.a<{
   $selected: boolean;
-  $height: string;
   $fontSize: string;
   $fontColor: string;
   $defaultColor: string;
@@ -84,11 +83,11 @@ export const Href = styled.a<{
   border-radius: 5px;
   width: ${(props) => (props.$width ? props.$width : "fit-content")};
   transition: 0.2s;
-  height: ${(props) => props.$height};
+  height: fit-content;
   font-size: ${(props) => props.$fontSize};
   text-decoration: none;
-  margin: 2px;
-  padding: 3px 2px 0 2px;
+  margin: 3px;
+  padding: 1px 2px;
   text-align: center;
   font-family: Dingding;
   ${(props) =>
@@ -96,20 +95,20 @@ export const Href = styled.a<{
       ? css`
           background-color: ${props.$selectedColor};
           color: ${props.$selectFontColor};
-          transform: scale(1.05);
+          transform: scale(1.1);
           outline: 1px solid ${props.$selectFontColor};
         `
       : css`
           background-color: ${props.$defaultColor};
           color: ${props.$fontColor};
-          transform: scale(0.95);
+          transform: scale(1);
         `}
   &:hover {
     cursor: pointer;
-    transform: scale(1);
+    transform: scale(1.05);
     color: ${(props) => props.$selectFontColor};
     outline: 1px solid ${(props) => props.$selectFontColor};
-    box-shadow: 2px 2px 3px 1px ${(props) => props.$selectFontColor};
+    box-shadow: 0 0 3px 1px ${(props) => props.$selectFontColor};
   }
 `;
 export const Container = styled.div<{ $fixed: Fixed | undefined }>`
