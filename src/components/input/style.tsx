@@ -17,6 +17,7 @@ export const InputContainer = styled.input<{ $width: string; $colors: any }>`
   transition: all 0.1s ease-in-out;
   &:focus,
   &:hover {
+    outline: none;
     border-bottom: 2px solid var(--accent-color);
   }
 `;
