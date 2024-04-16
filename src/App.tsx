@@ -12,6 +12,8 @@ import Header from "./pages/header";
 import Home from "./pages/home";
 import { Notification } from "@douyinfe/semi-ui";
 import "./assets/fonts/fonts.css";
+import "./assets/alibaba/aliIcons/iconfont.css";
+import "./assets/alibaba/aliLinks/iconfont.css";
 function App() {
   const dispatch = useAppDispatch();
   const [head, setHead] = useState(0);

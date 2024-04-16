@@ -1,0 +1,100 @@
+{
+  "id": "4475351",
+  "name": "基本",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "92961",
+      "name": "国内",
+      "font_class": "guonei",
+      "unicode": "e642",
+      "unicode_decimal": 58946
+    },
+    {
+      "icon_id": "8925057",
+      "name": "简单本地文件服务",
+      "font_class": "jiandanbendiwenjianfuwu",
+      "unicode": "e62d",
+      "unicode_decimal": 58925
+    },
+    {
+      "icon_id": "622774",
+      "name": "飞行 旅游 出差 飞机 800",
+      "font_class": "feiji800",
+      "unicode": "e669",
+      "unicode_decimal": 58985
+    },
+    {
+      "icon_id": "8684386",
+      "name": "网盘",
+      "font_class": "wangpan",
+      "unicode": "e63f",
+      "unicode_decimal": 58943
+    },
+    {
+      "icon_id": "739117",
+      "name": "首页",
+      "font_class": "shouye",
+      "unicode": "e639",
+      "unicode_decimal": 58937
+    },
+    {
+      "icon_id": "695193",
+      "name": "图片",
+      "font_class": "tupian",
+      "unicode": "e640",
+      "unicode_decimal": 58944
+    },
+    {
+      "icon_id": "1445190",
+      "name": "rename-box",
+      "font_class": "rename-box",
+      "unicode": "e877",
+      "unicode_decimal": 59511
+    },
+    {
+      "icon_id": "11882876",
+      "name": "bg-link",
+      "font_class": "bg-link",
+      "unicode": "e641",
+      "unicode_decimal": 58945
+    },
+    {
+      "icon_id": "11263888",
+      "name": "Add item",
+      "font_class": "Additem",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "23041894",
+      "name": "exit_fill",
+      "font_class": "exit_fill",
+      "unicode": "e6d8",
+      "unicode_decimal": 59096
+    },
+    {
+      "icon_id": "999258",
+      "name": "太阳",
+      "font_class": "ai250",
+      "unicode": "e6ee",
+      "unicode_decimal": 59118
+    },
+    {
+      "icon_id": "30044897",
+      "name": "月亮-fill",
+      "font_class": "moon-fill",
+      "unicode": "e6c0",
+      "unicode_decimal": 59072
+    },
+    {
+      "icon_id": "6145798",
+      "name": "collapse",
+      "font_class": "collapse",
+      "unicode": "e6c2",
+      "unicode_decimal": 59074
+    }
+  ]
+}

@@ -37,7 +37,7 @@ export default function Proxies(props: {
   }, [proxies]);
   return (
     <Container $headHeight={height}>
-      {groups ? (
+      {proxies && groups ? (
         <Anchor
           dark={dark}
           data={AnchorData(groups)}
