@@ -60,6 +60,7 @@ export const Content: FC<ContentProps> = ({
             </Tooltip>
           </Span>
           <Input
+            dark={dark}
             onChange={(e) => {
               onChangeName && onChangeName(e);
               setName(e);
@@ -75,6 +76,7 @@ export const Content: FC<ContentProps> = ({
             </Tooltip>
           </Span>
           <Input
+            dark={dark}
             type="url"
             onChange={(e) => onChangeUrl && onChangeUrl(e)}
             required={true}
@@ -88,6 +90,7 @@ export const Content: FC<ContentProps> = ({
             </Tooltip>
           </Span>
           <Input
+            dark={dark}
             type="url"
             onChange={(e) => {
               setIcon(e);

@@ -78,7 +78,12 @@ export default function Sing2cat(props: {
               <Icon className="bi bi-shield-lock-fill" />
             </Tooltip>
           </Span>
-          <Input type="text" width="80%" onChange={(e) => setSecret(e)}></Input>
+          <Input
+            dark={dark}
+            type="text"
+            width="80%"
+            onChange={(e) => setSecret(e)}
+          ></Input>
         </InputField>
         <div
           style={{
