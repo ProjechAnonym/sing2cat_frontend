@@ -18,6 +18,7 @@ export default function Reset() {
   const config = useAppSelector((state) => state.config.config);
   const nav = useNavigate();
   const dispatch = useAppDispatch();
+  const dark = useAppSelector((state) => state.style.dark);
   useEffect(() => {
     dispatch(setInit(true));
     valid !== 0 &&
@@ -73,6 +74,7 @@ export default function Reset() {
           </Tooltip>
         </Span>
         <Input
+          dark={dark}
           style={{ fontSize: "1.2rem", height: "1.5rem" }}
           width="15rem"
           type="email"
@@ -96,6 +98,7 @@ export default function Reset() {
           }}
         >
           <Input
+            dark={dark}
             style={{ fontSize: "1.2rem", height: "1.5rem" }}
             width="40%"
             type="text"
@@ -153,6 +156,7 @@ export default function Reset() {
           </Tooltip>
         </Span>
         <Input
+          dark={dark}
           style={{ fontSize: "1.2rem", height: "1.5rem" }}
           width="95%"
           type="password"

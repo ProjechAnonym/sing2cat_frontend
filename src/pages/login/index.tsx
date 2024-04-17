@@ -28,6 +28,7 @@ export default function Login() {
   // dispatch用于进行store状态的设置
   const dispatch = useAppDispatch();
   const nav = useNavigate();
+  const dark = useAppSelector((state) => state.style.dark);
   useEffect(() => {
     // 登录成功则跳转路由
     status && nav("home");
@@ -80,6 +81,7 @@ export default function Login() {
             </Tooltip>
           </Span>
           <Input
+            dark={dark}
             style={{ fontSize: "1.2rem", height: "1.5rem" }}
             width="95%"
             type="password"
