@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAppSelector } from "../../../hooks";
 import { AddContent } from "../style";
 import { Content } from "../content";
 import { CustomContainer, Icon, InputField, Span } from "../style";
@@ -8,18 +9,17 @@ import { ButtonComponent } from "../../../components/button";
 import { Notification } from "@douyinfe/semi-ui";
 import { AddComponent } from "./utils";
 export default function Sing2cat(props: {
-  dark: boolean;
   api: string;
   onAdd: (status: boolean) => void;
   token: string;
 }) {
-  const { dark, api, onAdd, token } = props;
+  const { api, onAdd, token } = props;
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
   const [iconLink, setIconLink] = useState("");
   const [file, setFile] = useState<File | null>(null);
   const [secret, setSecret] = useState<string>("");
-
+  const dark = useAppSelector((state) => state.style.dark);
   return (
     <AddContent
       onSubmit={(e) => {

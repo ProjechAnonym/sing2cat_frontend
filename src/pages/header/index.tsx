@@ -78,7 +78,10 @@ export default function Header(props: {
         }}
       >
         <Load open={deleteStatus}>
-          您将要删除{deleteItem?.label}组的{deleteItem?.name},是否确认?
+          <div style={{ fontFamily: "Dingding" }}>
+            您将要删除{deleteItem?.label}组的{deleteItem?.name}
+            ,是否确认?
+          </div>
         </Load>
       </Modal>
       <div style={{ display: "flex" }}>

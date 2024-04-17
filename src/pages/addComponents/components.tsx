@@ -10,7 +10,6 @@ export const ComponentsClass = (
     case "sing2cat":
       return (
         <Sing2cat
-          dark={dark}
           api={api}
           onAdd={(status) => callBack(status)}
           token={token}

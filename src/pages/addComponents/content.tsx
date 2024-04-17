@@ -30,7 +30,6 @@ export const Content: FC<ContentProps> = ({
   const [iconLink, setIconLink] = useState<string>("");
   const [file, setFile] = useState<File | null>(null);
   const upload = useRef<HTMLInputElement>(null);
-
   useEffect(() => {
     file &&
       displayPic(file, (e) => {
