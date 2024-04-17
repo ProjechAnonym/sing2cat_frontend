@@ -1,14 +1,13 @@
 import { ComponentsClass } from "./components";
 export function formatData(
   config: any,
-  dark: boolean,
   callBack: (status: boolean) => void,
   token: string
 ) {
   const components = config.Components.map((component: string) => {
     return {
       label: component,
-      value: ComponentsClass(component, dark, config.API, callBack, token),
+      value: ComponentsClass(component, config.API, callBack, token),
     };
   });
   return [{ label: "组件类型", value: components }];

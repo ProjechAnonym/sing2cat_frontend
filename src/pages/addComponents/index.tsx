@@ -27,7 +27,7 @@ export default function Add(props: { onAdd: (status: boolean) => void }) {
             dark={dark}
             data={
               Object.keys(config).length !== 0 && token
-                ? formatData(config, dark, (status) => onAdd(status), token)
+                ? formatData(config, (status) => onAdd(status), token)
                 : [
                     {
                       label: "default",
