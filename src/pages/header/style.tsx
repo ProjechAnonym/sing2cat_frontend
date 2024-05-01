@@ -28,7 +28,7 @@ export const Container = styled.header`
   padding: 3px 0;
 `;
 export const Img = styled.img`
-  size: 1.5rem, 1.5rem;
+  width: 1.5rem;
   font-family: Dingding;
   font-size: 1.5rem;
   margin: 0 3px;
